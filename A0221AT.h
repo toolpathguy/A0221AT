@@ -11,7 +11,7 @@ class A0221AT {
     // Initialize the sensor; no custom pin assignment
     void begin(long baudRate = 9600, long monitorBaud = 115200);
 
-    bool getDistance(float &distance_cm);
+    bool getDistance(float &distance_mm);
     void printRawData();
 
   private:

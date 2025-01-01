@@ -12,11 +12,11 @@ void setup() {
 }
 
 void loop() {
-  float distance_cm;
-  if (ultrasonicSensor.getDistance(distance_cm)) {
+  float distance_mm;
+  if (ultrasonicSensor.getDistance(distance_mm)) {
     Serial.print("Distance: ");
-    Serial.print(distance_cm);
-    Serial.println(" cm");
+    Serial.print(distance_mm);
+    Serial.println(" mm");
   }
   delay(1000);
 }

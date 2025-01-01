@@ -13,7 +13,7 @@ void A0221AT::begin(long baudRate, long monitorBaud) {
   Serial.println("A0221AT Ultrasonic Sensor Initialized");
 }
 
-bool A0221AT::getDistance(float &distance_cm) {
+bool A0221AT::getDistance(float &distance_mm) {
   while (_serial.available()) {
     _serial.read();
   }
@@ -34,8 +34,7 @@ bool A0221AT::getDistance(float &distance_cm) {
       uint8_t checksum = (_rxBuf[0] + _rxBuf[1] + _rxBuf[2]) & 0xFF;
       if (checksum == _rxBuf[3]) {
         uint16_t distance_mm = ((uint16_t)_rxBuf[1] << 8) | _rxBuf[2];
-        distance_cm = distance_mm / 10.0;
-        if (distance_mm > 30) {
+          if (distance_mm > 30) {
           return true;
         } else {
           Serial.println("Below the lower limit");
