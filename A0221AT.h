@@ -5,23 +5,17 @@
 
 class A0221AT {
   public:
-    // Constructor: Initialize with the desired UART instance and pins
-    A0221AT(HardwareSerial &serial, uint8_t rxPin, uint8_t txPin);
+    // Just store a reference to the serial port
+    A0221AT(HardwareSerial &serial);
 
-    // Initialize the sensor
+    // Initialize the sensor; no custom pin assignment
     void begin(long baudRate = 9600, long monitorBaud = 115200);
 
-    // Trigger a measurement and get the distance in cm
-    // Returns true if a valid measurement was received
     bool getDistance(float &distance_cm);
-
-    // Optional: Print raw data (for debugging)
     void printRawData();
 
   private:
     HardwareSerial &_serial;
-    uint8_t _rxPin;
-    uint8_t _txPin;
     uint8_t _rxBuf[4];
 };
 
