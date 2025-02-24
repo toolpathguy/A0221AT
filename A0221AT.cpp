@@ -22,7 +22,7 @@ bool A0221AT::getDistance(float &distance_mm) {
   _serial.write(0x55);
 
   // Wait for sensor response
-  delay(70);
+  delay(100);
 
   if (_serial.available() >= 4) {
     for (int i = 0; i < 4; i++) {
@@ -33,7 +33,8 @@ bool A0221AT::getDistance(float &distance_mm) {
     if (_rxBuf[0] == 0xFF) {
       uint8_t checksum = (_rxBuf[0] + _rxBuf[1] + _rxBuf[2]) & 0xFF;
       if (checksum == _rxBuf[3]) {
-        uint16_t distance_mm = ((uint16_t)_rxBuf[1] << 8) | _rxBuf[2];
+        uint16_t dist = ((uint16_t)_rxBuf[1] << 8) | _rxBuf[2];
+        distance_mm = (float)dist;
           if (distance_mm > 30) {
           return true;
         } else {
